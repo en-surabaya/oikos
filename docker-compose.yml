@@ -2,12 +2,18 @@ version: '3'
 
 services:
   adminer:
+    profiles:
+      - "dev"
+      - "prod"
     image: adminer
     ports:
       - '8080:8080'
     networks:
       - app-network
   db:
+    profiles:
+      - "dev"
+      - "prod"
     build:
       context: ./database
       dockerfile: Dockerfile
@@ -21,9 +27,49 @@ services:
     networks:
       - app-network
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
       - ./database/data/:/var/lib/mysql
+
+  dev:
+    profiles:
+      - "dev"
+    container_name: oikos_dev
+    image: oikos:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    ports:
+      - 5000:3000
+      - 9229:9229
+    networks:
+      - app-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  prod:
+    profiles:
+      - "prod"
+    container_name: oikos_prod
+    image: oikos-prod:1.0.0
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    ports:
+      - 5000:3000
+      - 9229:9229
+    networks:
+      - app-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
 
 networks:
   app-network:
