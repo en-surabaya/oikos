@@ -3,8 +3,8 @@ version: '3'
 services:
   adminer:
     profiles:
-      - "dev"
-      - "prod"
+      - 'dev'
+      - 'prod'
     image: adminer
     ports:
       - '8080:8080'
@@ -12,8 +12,8 @@ services:
       - app-network
   db:
     profiles:
-      - "dev"
-      - "prod"
+      - 'dev'
+      - 'prod'
     build:
       context: ./database
       dockerfile: Dockerfile
@@ -33,9 +33,10 @@ services:
 
   dev:
     profiles:
-      - "dev"
+      - 'dev'
     container_name: oikos_dev
     image: oikos:1.0.0
+    user: 1000:1000
     build:
       context: .
       target: development
@@ -53,9 +54,10 @@ services:
 
   prod:
     profiles:
-      - "prod"
+      - 'prod'
     container_name: oikos_prod
     image: oikos-prod:1.0.0
+    user: 1000:1000
     build:
       context: .
       target: production

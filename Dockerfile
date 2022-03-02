@@ -1,9 +1,6 @@
-FROM node:16-alpine AS development
+FROM node:16 AS development
 
 WORKDIR /usr/src/app
-
-RUN groupadd -g $gid myuser && useradd -lm -u $uid -g $gid myuser
-USER myuser
 
 COPY package*.json ./
 
@@ -15,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:16-alpine AS production
+FROM node:16 AS production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
