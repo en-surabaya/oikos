@@ -2,6 +2,9 @@ FROM node:16-alpine AS development
 
 WORKDIR /usr/src/app
 
+RUN groupadd -g $gid myuser && useradd -lm -u $uid -g $gid myuser
+USER myuser
+
 COPY package*.json ./
 
 RUN npm install glob rimraf
