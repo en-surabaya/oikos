@@ -13,6 +13,13 @@ export class User {
   name: string;
 
   @Field()
+  @Column()
+  username: string;
+
+  @Column()
+  password: string;
+
+  @Field()
   @Column({ default: true })
   isActive: boolean;
 }
