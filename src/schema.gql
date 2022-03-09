@@ -2,8 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Domain {
+  address: String!
+  id: Int!
+  title: String!
+}
+
 type JWT {
   access_token: String!
+}
+
+type LifeGroup {
+  id: Int!
+  title: String!
 }
 
 type Mutation {
@@ -12,13 +23,18 @@ type Mutation {
 }
 
 type Query {
+  getDomains: [Domain!]!
+  getLifeGroups: [LifeGroup!]!
   getUsers: [User!]!
   getUsersProtected: [User!]!
 }
 
 type User {
+  date_of_birth: String!
+  email: String!
   id: Int!
-  isActive: Boolean!
   name: String!
+  phone: String!
+  status: String!
   username: String!
 }

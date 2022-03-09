@@ -5,6 +5,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { DomainModule } from './modules/domain/domain.module';
+import { LifeGroupModule } from './modules/lifeGroup/lifeGroup.module';
+import { LifeGroupMemberModule } from './modules/lifeGroupMember/lifeGroupMember.module';
 
 @Module({
   imports: [
@@ -16,6 +19,9 @@ import { AuthModule } from './modules/auth/auth.module';
     TypeOrmModule.forRoot(),
     UserModule,
     AuthModule,
+    DomainModule,
+    LifeGroupModule,
+    LifeGroupMemberModule,
   ],
 })
 export class AppModule {}
