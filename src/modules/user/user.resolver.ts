@@ -4,21 +4,16 @@ import { GqlAuthGuard } from '../auth/helper/gql-auth.guard';
 import { CurrentUser } from '../auth/helper/gqlContext';
 import { Domain } from '../domain/domain.entity';
 import { User } from './user.entity';
-import { ActivateUserInput, CreateUserInput } from './user.interface';
+import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
 import { UserService } from './user.service';
 
 @Resolver((of) => User)
+// @UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query((returns) => [User])
   async getUsers() {
-    return this.userService.getAllUser();
-  }
-
-  @Query((returns) => [User])
-  @UseGuards(GqlAuthGuard)
-  async getUsersProtected() {
     return this.userService.getAllUser();
   }
 
@@ -40,6 +35,11 @@ export class UserResolver {
   @Mutation((returns) => User)
   async createUser(@Args('input') input: CreateUserInput) {
     return this.userService.createUser(input);
+  }
+
+  @Mutation((returns) => User)
+  async updateUser(@Args('userId', { type: () => Int }) userId: number, @Args('input') input: UpdateUserInput) {
+    return this.userService.updateUser(userId, input);
   }
 
   @Mutation((returns) => User)

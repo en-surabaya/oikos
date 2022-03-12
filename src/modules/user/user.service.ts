@@ -5,7 +5,7 @@ import { User } from './user.entity';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { randomBytes } from 'crypto';
 import { DomainService } from '../domain/domain.service';
-import { ActivateUserInput, CreateUserInput } from './user.interface';
+import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
 import { DuplicateUsernameError } from './errors/duplicateUsername.error';
 import { UserAlreadyActivated } from './errors/userAlreadyActivated.error';
 
@@ -71,5 +71,20 @@ export class UserService {
     }
 
     return this.userRepository.save(leader);
+  }
+
+  async updateUser(userId: number, input: UpdateUserInput): Promise<User> {
+    if (input.password) {
+      const salt = genSaltSync();
+      const hashedPassword = hashSync(input.password, salt);
+      input.password = hashedPassword;
+    }
+
+    await this.userRepository.save({
+      id: userId,
+      ...input,
+    });
+
+    return this.findOneById(userId);
   }
 }
