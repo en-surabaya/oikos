@@ -1,12 +1,16 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { LifeGroup } from '../lifeGroup/lifeGroup.entity';
 import { User } from '../user/user.entity';
 
-enum LifeGroupRole {
+export enum LifeGroupRole {
   MEMBER = 'Member',
   LEADER = 'Leader',
 }
+
+registerEnumType(LifeGroupRole, {
+  name: 'LifeGroupRole',
+});
 
 @Entity()
 @ObjectType()

@@ -1,14 +1,29 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
+  getRepository,
+} from 'typeorm';
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Domain } from '../domain/domain.entity';
 import { LifeGroupMember } from '../lifeGroupMember/lifeGroupMember.entity';
+import { GqlUserLifeGroupRole } from './user.interface';
 
-enum LeadershipStatus {
+export enum LeadershipStatus {
   CAMPUS_MISSIONARY = 'CampusMissionary',
   LEADER = 'Leader',
   INTERN = 'Intern',
   MEMBER = 'Member',
+  POTENTIAL_MEMBER = 'PotentialMember',
 }
+
+registerEnumType(LeadershipStatus, {
+  name: 'LeadershipStatus',
+});
 
 @ObjectType()
 @Entity()
@@ -25,22 +40,22 @@ export class User {
   @Column({ type: 'enum', enum: LeadershipStatus })
   status: LeadershipStatus;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   username?: string;
 
   @Column({ nullable: true })
   password?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   email?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   phone?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({
     type: 'date',
     nullable: true,
@@ -60,6 +75,9 @@ export class User {
   @OneToMany(() => LifeGroupMember, (lifeGroupMember) => lifeGroupMember.user)
   lifeGroupMembers: LifeGroupMember[];
 
+  @Field((type) => [GqlUserLifeGroupRole])
+  lifeGroups: GqlUserLifeGroupRole[];
+
   @Column({ default: false })
   isAccountActivated: boolean;
 
@@ -71,4 +89,14 @@ export class User {
 
   @Column({ default: 0 })
   history: number;
+
+  // async getDomain(refresh: boolean = true) {
+  //   if (refresh || !this.domain) {
+  //     this.domain = await getRepository(Domain).findOne({
+  //       where: {
+
+  //       }
+  //     })
+  //   }
+  // }
 }

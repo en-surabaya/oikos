@@ -2,23 +2,68 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input ActivateUserInput {
+  activationToken: String!
+  password: String!
+  userId: Int!
+  username: String!
+}
+
+input CreateUserInput {
+  date_of_birth: String
+  email: String
+  name: String!
+  phone: String
+  status: LeadershipStatus!
+}
+
 type Domain {
   address: String!
   id: Int!
   title: String!
 }
 
+type GqlLifeGroupMember {
+  role: LifeGroupRole!
+  user: User!
+}
+
+type GqlUserLifeGroupRole {
+  lifeGroup: LifeGroup!
+  role: LifeGroupRole!
+}
+
 type JWT {
   access_token: String!
 }
 
+enum LeadershipStatus {
+  CAMPUS_MISSIONARY
+  INTERN
+  LEADER
+  MEMBER
+  POTENTIAL_MEMBER
+}
+
 type LifeGroup {
+  domain: Domain
   id: Int!
+  members: [GqlLifeGroupMember!]!
   title: String!
 }
 
+enum LifeGroupRole {
+  LEADER
+  MEMBER
+}
+
 type Mutation {
-  createUser(name: String!, password: String!, username: String!): User!
+  activateUser(input: ActivateUserInput!): User!
+  addLifeGroupMember(lifeGroupId: Int!, role: String!, userId: Int!): LifeGroup!
+  attachDisciple(discipleId: Int!, leaderId: Int!): User!
+  createDomain(address: String!, title: String!): Domain!
+  createLifeGroup(title: String!): LifeGroup!
+  createUser(input: CreateUserInput!): User!
   login(password: String!, username: String!): JWT!
 }
 
@@ -30,11 +75,15 @@ type Query {
 }
 
 type User {
-  date_of_birth: String!
-  email: String!
+  date_of_birth: String
+  disciples: [User!]!
+  domain: Domain
+  email: String
   id: Int!
+  leaders: [User!]!
+  lifeGroups: [GqlUserLifeGroupRole!]!
   name: String!
-  phone: String!
+  phone: String
   status: String!
-  username: String!
+  username: String
 }

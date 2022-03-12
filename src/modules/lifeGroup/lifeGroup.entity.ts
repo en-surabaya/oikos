@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Domain } from '../domain/domain.entity';
+import { GqlLifeGroupMember } from '../lifeGroupMember/lifeGroupMember.interface';
 import { LifeGroupMember } from '../lifeGroupMember/lifeGroupMember.entity';
 
 @Entity()
@@ -13,6 +14,9 @@ export class LifeGroup {
   @Column()
   @Field()
   title: string;
+
+  @Field((type) => [GqlLifeGroupMember])
+  members: GqlLifeGroupMember[];
 
   @OneToMany(() => LifeGroupMember, (lifeGroupMember) => lifeGroupMember.lifeGroup)
   lifeGroupMembers: LifeGroupMember[];

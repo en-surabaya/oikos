@@ -7,5 +7,6 @@ import { DomainService } from './domain.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Domain])],
   providers: [DomainService, DomainResolver],
+  exports: [DomainService],
 })
 export class DomainModule {}
