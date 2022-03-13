@@ -17,6 +17,10 @@ input CreateUserInput {
   status: LeadershipStatus!
 }
 
+enum DiscipleshipJourney {
+  ENGAGE
+}
+
 type Domain {
   address: String!
   id: Int!
@@ -76,6 +80,7 @@ type Query {
 
 input UpdateUserInput {
   date_of_birth: String
+  discipleshipJourney: DiscipleshipJourney
   email: String
   name: String
   password: String
@@ -86,6 +91,7 @@ input UpdateUserInput {
 type User {
   date_of_birth: String
   disciples: [User!]!
+  discipleshipJourney: DiscipleshipJourney!
   domain: Domain
   email: String
   id: Int!

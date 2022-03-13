@@ -5,6 +5,7 @@ import { LifeGroup } from '../lifeGroup/lifeGroup.entity';
 import { User } from '../user/user.entity';
 import { GqlLifeGroupMember } from './lifeGroupMember.interface';
 import { LifeGroupMember, LifeGroupRole } from './lifeGroupMember.entity';
+import { GqlUserLifeGroupRole } from '../user/user.interface';
 
 @Injectable()
 export class LifeGroupMemberService {
@@ -31,6 +32,22 @@ export class LifeGroupMemberService {
     return lifeGroupMembers.map((member) => {
       return {
         user: member.user,
+        role: member.role,
+      };
+    });
+  }
+
+  async getLifeGroups(user: User): Promise<GqlUserLifeGroupRole[]> {
+    const lifeGroupMembers = await this.lifeGroupMemberRepository.find({
+      where: {
+        user,
+      },
+      relations: ['lifeGroup'],
+    });
+
+    return lifeGroupMembers.map((member) => {
+      return {
+        lifeGroup: member.lifeGroup,
         role: member.role,
       };
     });

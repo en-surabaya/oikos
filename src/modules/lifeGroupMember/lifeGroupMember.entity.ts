@@ -28,4 +28,7 @@ export class LifeGroupMember {
   @Field()
   @Column({ type: 'enum', enum: LifeGroupRole })
   role: LifeGroupRole;
+
+  @Column({ default: true })
+  isActive: boolean;
 }

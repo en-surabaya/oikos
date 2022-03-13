@@ -12,6 +12,7 @@ import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Domain } from '../domain/domain.entity';
 import { LifeGroupMember } from '../lifeGroupMember/lifeGroupMember.entity';
 import { GqlUserLifeGroupRole } from './user.interface';
+import { MentorshipEntity } from '../mentorship/mentorship.entity';
 
 export enum LeadershipStatus {
   CAMPUS_MISSIONARY = 'CampusMissionary',
@@ -24,6 +25,12 @@ export enum LeadershipStatus {
 registerEnumType(LeadershipStatus, {
   name: 'LeadershipStatus',
 });
+
+export enum DiscipleshipJourney {
+  ENGAGE = 'Engage',
+}
+
+registerEnumType(DiscipleshipJourney, { name: 'DiscipleshipJourney' });
 
 @ObjectType()
 @Entity()
@@ -39,6 +46,10 @@ export class User {
   @Field()
   @Column({ type: 'enum', enum: LeadershipStatus })
   status: LeadershipStatus;
+
+  @Field((type) => DiscipleshipJourney)
+  @Column({ type: 'enum', enum: DiscipleshipJourney, default: DiscipleshipJourney.ENGAGE })
+  discipleshipJourney: DiscipleshipJourney;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -62,12 +73,11 @@ export class User {
   })
   date_of_birth?: string;
 
-  @ManyToMany(() => User, (user) => user.leaders)
-  disciples: User[];
-
-  @ManyToMany(() => User, (user) => user.disciples)
-  @JoinTable()
+  @OneToMany(() => MentorshipEntity, (mentorship) => mentorship.leader)
   leaders: User[];
+
+  @OneToMany(() => MentorshipEntity, (mentorship) => mentorship.disciple)
+  disciples: User[];
 
   @ManyToOne(() => Domain, (domain) => domain.users)
   domain: Domain;
@@ -89,14 +99,4 @@ export class User {
 
   @Column({ default: 0 })
   history: number;
-
-  // async getDomain(refresh: boolean = true) {
-  //   if (refresh || !this.domain) {
-  //     this.domain = await getRepository(Domain).findOne({
-  //       where: {
-
-  //       }
-  //     })
-  //   }
-  // }
 }

@@ -1,10 +1,7 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { GqlAuthGuard } from '../auth/helper/gql-auth.guard';
-import { CurrentUser } from '../auth/helper/gqlContext';
 import { Domain } from '../domain/domain.entity';
 import { User } from './user.entity';
-import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
+import { ActivateUserInput, CreateUserInput, GqlUserLifeGroupRole, UpdateUserInput } from './user.interface';
 import { UserService } from './user.service';
 
 @Resolver((of) => User)
@@ -24,12 +21,17 @@ export class UserResolver {
 
   @ResolveField((returns) => [User])
   async leaders(@Parent() user: User) {
-    return (await this.userService.findOneById(user.id, { relations: ['leaders'] })).leaders;
+    return this.userService.getLeaders(user);
   }
 
   @ResolveField((returns) => [User])
   async disciples(@Parent() user: User) {
-    return (await this.userService.findOneById(user.id, { relations: ['disciples'] })).disciples;
+    return this.userService.getDisciples(user);
+  }
+
+  @ResolveField((returns) => [GqlUserLifeGroupRole])
+  async lifeGroups(@Parent() user: User) {
+    return await this.userService.getLifeGroups(user);
   }
 
   @Mutation((returns) => User)

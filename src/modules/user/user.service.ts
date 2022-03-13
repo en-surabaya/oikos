@@ -8,12 +8,16 @@ import { DomainService } from '../domain/domain.service';
 import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
 import { DuplicateUsernameError } from './errors/duplicateUsername.error';
 import { UserAlreadyActivated } from './errors/userAlreadyActivated.error';
+import { LifeGroupMemberService } from '../lifeGroupMember/lifeGroupMember.service';
+import { MentorshipService } from '../mentorship/mentorship.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly lifeGroupMemberService: LifeGroupMemberService,
+    private readonly mentorshipService: MentorshipService,
     private readonly domainService: DomainService,
   ) {}
 
@@ -64,13 +68,20 @@ export class UserService {
     const leader = await this.findOneById(leaderId, { relations: ['disciples'] });
     const disciple = await this.findOneById(discipleId);
 
-    if (!leader.disciples) {
-      leader.disciples = [disciple];
-    } else {
-      leader.disciples.push(disciple);
-    }
+    await this.mentorshipService.attachDisciple(leader, disciple);
+    return leader;
+  }
 
-    return this.userRepository.save(leader);
+  async getLeaders(user: User): Promise<User[]> {
+    return this.mentorshipService.getLeaders(user);
+  }
+
+  async getDisciples(user: User): Promise<User[]> {
+    return this.mentorshipService.getDisciples(user);
+  }
+
+  async save(user: User) {
+    return this.userRepository.save(user);
   }
 
   async updateUser(userId: number, input: UpdateUserInput): Promise<User> {
@@ -80,11 +91,30 @@ export class UserService {
       input.password = hashedPassword;
     }
 
-    await this.userRepository.save({
-      id: userId,
-      ...input,
+    const user = await this.findOneById(userId);
+    const { id, isActive, ...oldUser } = user;
+
+    const isDirty = Object.keys(UpdateUserInput).some((prop) => {
+      return prop ? true : false;
     });
 
+    if (isDirty) {
+      await this.userRepository.save({
+        ...oldUser,
+        isActive: false,
+      });
+
+      await this.userRepository.save({
+        id: user.id,
+        history: user.history + 1,
+        ...input,
+      });
+    }
+
     return this.findOneById(userId);
+  }
+
+  async getLifeGroups(user: User) {
+    return this.lifeGroupMemberService.getLifeGroups(user);
   }
 }

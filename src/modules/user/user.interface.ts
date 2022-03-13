@@ -1,7 +1,7 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { LifeGroup } from '../lifeGroup/lifeGroup.entity';
 import { LifeGroupRole } from '../lifeGroupMember/lifeGroupMember.entity';
-import { LeadershipStatus } from './user.entity';
+import { DiscipleshipJourney, LeadershipStatus } from './user.entity';
 
 @ObjectType()
 export class GqlUserLifeGroupRole {
@@ -49,6 +49,9 @@ export class UpdateUserInput {
 
   @Field({ nullable: true })
   date_of_birth?: string;
+
+  @Field((type) => DiscipleshipJourney, { nullable: true })
+  discipleshipJourney?: DiscipleshipJourney;
 }
 
 @InputType()
