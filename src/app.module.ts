@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { DomainModule } from './modules/domain/domain.module';
 import { LifeGroupModule } from './modules/lifeGroup/lifeGroup.module';
 import { LifeGroupMemberModule } from './modules/lifeGroupMember/lifeGroupMember.module';
+import { EventModule } from './modules/event/event.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { LifeGroupMemberModule } from './modules/lifeGroupMember/lifeGroupMember
     DomainModule,
     LifeGroupModule,
     LifeGroupMemberModule,
+    EventModule,
   ],
 })
 export class AppModule {}

@@ -4,7 +4,6 @@ import { FindOneOptions, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { randomBytes } from 'crypto';
-import { DomainService } from '../domain/domain.service';
 import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
 import { DuplicateUsernameError } from './errors/duplicateUsername.error';
 import { UserAlreadyActivated } from './errors/userAlreadyActivated.error';
@@ -18,7 +17,6 @@ export class UserService {
     private readonly userRepository: Repository<User>,
     private readonly lifeGroupMemberService: LifeGroupMemberService,
     private readonly mentorshipService: MentorshipService,
-    private readonly domainService: DomainService,
   ) {}
 
   async findOne(username: string) {
