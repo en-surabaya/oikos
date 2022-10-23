@@ -4,11 +4,18 @@ import { FindOneOptions, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { randomBytes } from 'crypto';
-import { ActivateUserInput, CreateUserInput, UpdateUserInput } from './user.interface';
+import {
+  ActivateUserInput,
+  CreateUserInput,
+  GetAllUsersPaginatedFilterInput,
+  GetAllUsersPaginatedInput,
+  UpdateUserInput,
+} from './user.interface';
 import { DuplicateUsernameError } from './errors/duplicateUsername.error';
 import { UserAlreadyActivated } from './errors/userAlreadyActivated.error';
 import { LifeGroupMemberService } from '../lifeGroupMember/lifeGroupMember.service';
 import { MentorshipService } from '../mentorship/mentorship.service';
+import { PaginationService } from '../common/pagination/pagination.service';
 
 @Injectable()
 export class UserService {
@@ -17,6 +24,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
     private readonly lifeGroupMemberService: LifeGroupMemberService,
     private readonly mentorshipService: MentorshipService,
+    private readonly paginationService: PaginationService,
   ) {}
 
   async findOne(username: string) {
@@ -33,6 +41,10 @@ export class UserService {
 
   async getAllUser() {
     return this.userRepository.find();
+  }
+
+  async getAllUsersPaginated(input: GetAllUsersPaginatedInput) {
+    return this.paginationService.handleRequest<GetAllUsersPaginatedFilterInput, User>(input, this.userRepository);
   }
 
   async activateUser(input: ActivateUserInput) {

@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Dashboard } from "./pages/Dashboard";
-import { Home } from "./pages/Home";
+import { MainLayout } from "./pages/MainLayout";
+import { PeoplePage } from "./pages/PeoplePage";
 
 export const MainRoutes: FC = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/dashboard" element={<Dashboard />} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<PeoplePage />} />
+      </Route>
+    </Routes>
+  );
 };

@@ -1,13 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-  ManyToOne,
-  OneToMany,
-  getRepository,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Domain } from '../domain/domain.entity';
 import { LifeGroupMember } from '../lifeGroupMember/lifeGroupMember.entity';
@@ -15,11 +6,11 @@ import { GqlUserLifeGroupRole } from './user.interface';
 import { MentorshipEntity } from '../mentorship/mentorship.entity';
 
 export enum LeadershipStatus {
-  CAMPUS_MISSIONARY = 'CampusMissionary',
-  LEADER = 'Leader',
-  INTERN = 'Intern',
-  MEMBER = 'Member',
-  POTENTIAL_MEMBER = 'PotentialMember',
+  CAMPUS_MISSIONARY = 'CAMPUS_MISSIONARY',
+  LEADER = 'LEADER',
+  INTERN = 'INTERN',
+  MEMBER = 'MEMBER',
+  POTENTIAL_MEMBER = 'POTENTIAL_MEMBER',
 }
 
 registerEnumType(LeadershipStatus, {
@@ -27,7 +18,7 @@ registerEnumType(LeadershipStatus, {
 });
 
 export enum DiscipleshipJourney {
-  ENGAGE = 'Engage',
+  ENGAGE = 'ENGAGE',
 }
 
 registerEnumType(DiscipleshipJourney, { name: 'DiscipleshipJourney' });
@@ -43,13 +34,33 @@ export class User {
   @Column()
   name: string;
 
-  @Field()
-  @Column({ type: 'enum', enum: LeadershipStatus })
-  status: LeadershipStatus;
+  @Field((type) => [LeadershipStatus])
+  @Column({
+    type: 'varchar',
+    transformer: {
+      to(value) {
+        return JSON.stringify(value);
+      },
+      from(value) {
+        return JSON.parse(value);
+      },
+    },
+  })
+  status: LeadershipStatus[];
 
-  @Field((type) => DiscipleshipJourney)
-  @Column({ type: 'enum', enum: DiscipleshipJourney, default: DiscipleshipJourney.ENGAGE })
-  discipleshipJourney: DiscipleshipJourney;
+  @Field((type) => [DiscipleshipJourney])
+  @Column({
+    type: 'varchar',
+    transformer: {
+      to(value) {
+        return JSON.stringify(value);
+      },
+      from(value) {
+        return JSON.parse(value);
+      },
+    },
+  })
+  discipleshipJourney: DiscipleshipJourney[];
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -99,4 +110,7 @@ export class User {
 
   @Column({ default: 0 })
   history: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

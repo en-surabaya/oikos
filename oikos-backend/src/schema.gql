@@ -21,10 +21,11 @@ input CreateEventInput {
 
 input CreateUserInput {
   date_of_birth: String
+  discipleshipJourney: [DiscipleshipJourney!]!
   email: String
   name: String!
   phone: String
-  status: LeadershipStatus!
+  status: [LeadershipStatus!]!
 }
 
 """
@@ -44,6 +45,15 @@ type Domain {
 
 type EventEntity {
   id: Int!
+}
+
+input GetAllUsersPaginatedFilterInput {
+  name: String
+}
+
+input GetAllUsersPaginatedInput {
+  filter: GetAllUsersPaginatedFilterInput
+  page: PageInput!
 }
 
 type GqlLifeGroupMember {
@@ -92,7 +102,23 @@ type Mutation {
   updateUser(input: UpdateUserInput!, userId: Int!): User!
 }
 
+type Page {
+  skip: Int!
+  take: Int!
+}
+
+type PageInfo {
+  nextPage: Page
+  prevPage: Page
+}
+
+input PageInput {
+  skip: Int!
+  take: Int!
+}
+
 type Query {
+  getAllUsersPaginated(input: GetAllUsersPaginatedInput!): UserPaginatedResponse!
   getDomains: [Domain!]!
   getLifeGroups: [LifeGroup!]!
   getUsers: [User!]!
@@ -100,18 +126,18 @@ type Query {
 
 input UpdateUserInput {
   date_of_birth: String
-  discipleshipJourney: DiscipleshipJourney
+  discipleshipJourney: [DiscipleshipJourney!]
   email: String
   name: String
   password: String
   phone: String
-  status: LeadershipStatus
+  status: [LeadershipStatus!]
 }
 
 type User {
   date_of_birth: String
   disciples: [User!]!
-  discipleshipJourney: DiscipleshipJourney!
+  discipleshipJourney: [DiscipleshipJourney!]!
   domain: Domain
   email: String
   id: Int!
@@ -119,6 +145,12 @@ type User {
   lifeGroups: [GqlUserLifeGroupRole!]!
   name: String!
   phone: String
-  status: String!
+  status: [LeadershipStatus!]!
   username: String
+}
+
+type UserPaginatedResponse {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
 }

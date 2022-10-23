@@ -1,7 +1,15 @@
 import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { PaginatedResponse } from '../common/pagination/pagination.entity';
 import { Domain } from '../domain/domain.entity';
 import { User } from './user.entity';
-import { ActivateUserInput, CreateUserInput, GqlUserLifeGroupRole, UpdateUserInput } from './user.interface';
+import {
+  ActivateUserInput,
+  CreateUserInput,
+  GetAllUsersPaginatedInput,
+  GqlUserLifeGroupRole,
+  UpdateUserInput,
+  UserPaginatedResponse,
+} from './user.interface';
 import { UserService } from './user.service';
 
 @Resolver((of) => User)
@@ -12,6 +20,11 @@ export class UserResolver {
   @Query((returns) => [User])
   async getUsers() {
     return this.userService.getAllUser();
+  }
+
+  @Query((returns) => UserPaginatedResponse)
+  async getAllUsersPaginated(@Args('input') input: GetAllUsersPaginatedInput) {
+    return this.userService.getAllUsersPaginated(input);
   }
 
   @ResolveField((returns) => Domain, { nullable: true })

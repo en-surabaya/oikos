@@ -1,0 +1,25 @@
+query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
+  result: getAllUsersPaginated(input: $input) {
+    nodes {
+      date_of_birth
+      discipleshipJourney
+      email
+      id
+      name
+      phone
+      status
+      username
+    }
+    pageInfo {
+      nextPage {
+        skip
+        take
+      }
+      prevPage {
+        skip
+        take
+      }
+    }
+    totalCount
+  }
+}
