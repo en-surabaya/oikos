@@ -1,7 +1,18 @@
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 
-const TableBodyRow: FC = ({ children }) => {
-  return <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">{children}</tr>;
+const TableBodyRow: FC<{
+  onClick?: MouseEventHandler<HTMLTableRowElement>;
+}> = ({ children, onClick }) => {
+  return (
+    <tr
+      onClick={onClick}
+      className={`${
+        onClick ? "hover:cursor-pointer" : ""
+      } bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`}
+    >
+      {children}
+    </tr>
+  );
 };
 
 const TableBodyCell: FC = ({ children }) => {

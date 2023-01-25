@@ -121,6 +121,7 @@ type Query {
   getAllUsersPaginated(input: GetAllUsersPaginatedInput!): UserPaginatedResponse!
   getDomains: [Domain!]!
   getLifeGroups: [LifeGroup!]!
+  getUser(id: Int!): User!
   getUsers: [User!]!
 }
 

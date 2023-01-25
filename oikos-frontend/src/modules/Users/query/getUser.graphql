@@ -1,0 +1,16 @@
+fragment UserFragment on User {
+  date_of_birth
+  discipleshipJourney
+  email
+  id
+  name
+  phone
+  status
+  username
+}
+
+query getUser($id: Int!) {
+  result: getUser(id: $id) {
+    ...UserFragment
+  }
+}
