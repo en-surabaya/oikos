@@ -2,11 +2,12 @@ import { FC } from "react";
 import { PhotoIcon } from "@heroicons/react/20/solid";
 import { Avatar } from "./Avatar";
 import { PillGroup } from "../PillGroup/PillGroup";
+import { LeadershipStatus } from "../../generated/graphql";
 
 interface Props {
   name: string;
   imagePath?: string;
-  tags?: string[];
+  tags?: LeadershipStatus[][];
 }
 
 export const AvatarWithText: FC<Props> = ({ name, imagePath, tags }) => {
@@ -17,7 +18,7 @@ export const AvatarWithText: FC<Props> = ({ name, imagePath, tags }) => {
         <h1 className="text-2xl">
           <b>{name}</b>
         </h1>
-        {tags && <PillGroup items={tags} maxItem={3} />}
+        {tags && <PillGroup items={tags[0]} maxItem={3} />}
       </div>
     </div>
   );

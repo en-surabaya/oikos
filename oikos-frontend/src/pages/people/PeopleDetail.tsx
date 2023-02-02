@@ -22,7 +22,7 @@ export const PeopleDetail: FC = () => {
           <div className="w-[40%]">
             <AvatarWithText
               name={data.result.name}
-              tags={["Makmu", "Makku", "BapakMu", "BapakKu"]}
+              tags={[data.result.status]}
             />
           </div>
           <button className="w-[40%]flex justify-end text-red-700 underline hover:text-red-900 active:text-red-500">
