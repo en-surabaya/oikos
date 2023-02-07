@@ -111,6 +111,8 @@ export const PeopleDetail: FC = () => {
                         "Enoch",
                         "Enoch",
                         "Enoch",
+                        "Enoch",
+                        "Yoel Sitorus",
                       ]}
                     />
                   </div>

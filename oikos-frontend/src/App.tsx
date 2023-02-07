@@ -4,11 +4,11 @@ import "./App.css";
 import { MainRoutes } from "./MainRoutes";
 
 function App() {
-	return (
-		<BrowserRouter>
-			<MainRoutes />
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <MainRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App;
