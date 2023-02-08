@@ -22,13 +22,18 @@ export interface FormValues {
   discipleshipJourney: DiscipleshipJourney[];
   email?: string;
   phone?: string;
+  address?: string;
+  gender?: string;
+  dateOfBirth?: string;
 }
 
 export const UserAddModal: FC<Props> = ({ showAdd, setShowAdd }) => {
   const { register, handleSubmit, reset, control } = useForm<FormValues>({
     defaultValues: { status: [], discipleshipJourney: [] },
   });
-  const [createUser] = useCreateUserMutation({ refetchQueries: ["getUsers"] });
+  const [createUser] = useCreateUserMutation({
+    refetchQueries: ["getUsersPaginated"],
+  });
 
   const { refetch } = usePagination();
 
@@ -102,6 +107,22 @@ export const UserAddModal: FC<Props> = ({ showAdd, setShowAdd }) => {
                   </FormMultipleComboBox.Option>
                 ))}
               </FormMultipleComboBox>
+            </Form.Group>
+            <Form.Group>
+              <Form.Group.Input
+                label="Address"
+                type="text"
+                placeholder=" "
+                register={register("address")}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Group.Input
+                label="Gender"
+                type="text"
+                placeholder=" "
+                register={register("gender")}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Group.Input

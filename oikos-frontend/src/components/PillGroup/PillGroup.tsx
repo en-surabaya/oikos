@@ -10,7 +10,7 @@ export const PillGroup: FC<Props> = ({ items, maxItem }) => {
   const toBePrinted = maxItem ? items.slice(0, maxItem) : items;
   const ellipsis = maxItem ? items.length > maxItem : false;
   return (
-    <div className="flex space-x-1">
+    <div className="flex gap-2 w-full flex-wrap">
       {toBePrinted.map((item) => (
         <Pill key={`pill-${item}`} text={item} />
       ))}

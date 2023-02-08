@@ -66,6 +66,10 @@ export class User {
   @Column({ nullable: true })
   username?: string;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  gender?: string;
+
   @Column({ nullable: true })
   password?: string;
 
@@ -78,11 +82,15 @@ export class User {
   phone?: string;
 
   @Field({ nullable: true })
+  @Column({ nullable: true })
+  address?: string;
+
+  @Field({ nullable: true })
   @Column({
     type: 'date',
     nullable: true,
   })
-  date_of_birth?: string;
+  dateOfBirth?: string;
 
   @OneToMany(() => MentorshipEntity, (mentorship) => mentorship.leader)
   leaders: User[];

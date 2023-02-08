@@ -1,7 +1,11 @@
 import { FC } from "react";
 
 const TableHeaderRoot: FC = ({ children }) => {
-  return <thead className="text-xs text-gray-700 uppercase bg-dark-lighter dark:bg-gray-700 dark:text-gray-400">{children}</thead>;
+  return (
+    <thead className="text-xs text-gray-700 uppercase bg-dark-lighter">
+      {children}
+    </thead>
+  );
 };
 
 const TableHeaderRow: FC = ({ children }) => {

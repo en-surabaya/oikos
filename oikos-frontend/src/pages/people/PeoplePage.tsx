@@ -1,9 +1,9 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { FC, useState } from "react";
-import { OffsetPaginationProvider } from "../components/Pagination/OffsetPaginationProvider";
-import { UserAddModal } from "../modules/Users/components/UserAddModal";
-import { UserTable } from "../modules/Users/components/UserTable";
-import { useGetUsersPaginated } from "../modules/Users/query/getUsersPaginated";
+import { OffsetPaginationProvider } from "../../components/Pagination/OffsetPaginationProvider";
+import { UserAddModal } from "../../modules/Users/components/UserAddModal";
+import { UserTable } from "../../modules/Users/components/UserTable";
+import { useGetUsersPaginated } from "../../modules/Users/query/getUsersPaginated";
 
 export const PeoplePage: FC = () => {
   const [showAdd, setShowAdd] = useState(false);
