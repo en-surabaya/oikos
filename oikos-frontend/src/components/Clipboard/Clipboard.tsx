@@ -7,7 +7,7 @@ interface Props {
 
 export const Clipboard: FC<Props> = ({ title, children }) => {
   return (
-    <div className="space-y-3 mb-3">
+    <div className="space-y-3 mb-3 h-full">
       <div className="flex flex-row justify-between">
         <h1>
           <b>{title}</b>
@@ -16,7 +16,7 @@ export const Clipboard: FC<Props> = ({ title, children }) => {
           Edit
         </button>
       </div>
-      <div className="flex flex-col bg-slate-50 rounded-xl content-start drop-shadow-md py-4 space-y-3">
+      <div className="flex flex-col bg-slate-50 rounded-xl content-start drop-shadow-md py-4 space-y-3 h-full">
         {children}
       </div>
     </div>

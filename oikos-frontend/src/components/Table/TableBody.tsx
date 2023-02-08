@@ -8,7 +8,7 @@ const TableBodyRow: FC<{
       onClick={onClick}
       className={`${
         onClick ? "hover:cursor-pointer" : ""
-      } bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`}
+      } bg-white border-b hover:bg-gray-100`}
     >
       {children}
     </tr>
@@ -20,7 +20,7 @@ const TableBodyCell: FC = ({ children }) => {
 };
 
 const TableBodyRoot: FC = ({ children }) => {
-  return <tbody>{children}</tbody>;
+  return <tbody className="rounded-lg">{children}</tbody>;
 };
 
 export const TableBody = Object.assign(TableBodyRoot, {

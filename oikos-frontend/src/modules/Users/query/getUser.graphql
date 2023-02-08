@@ -1,5 +1,5 @@
 fragment UserFragment on User {
-  date_of_birth
+  dateOfBirth
   discipleshipJourney
   email
   id
@@ -7,6 +7,19 @@ fragment UserFragment on User {
   phone
   status
   username
+  address
+  gender
+  leaders {
+    name
+  }
+  disciples {
+    name
+  }
+  lifeGroups {
+    lifeGroup {
+      title
+    }
+  }
 }
 
 query getUser($id: Int!) {

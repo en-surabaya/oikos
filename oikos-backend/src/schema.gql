@@ -20,9 +20,11 @@ input CreateEventInput {
 }
 
 input CreateUserInput {
-  date_of_birth: String
+  address: String
+  dateOfBirth: String
   discipleshipJourney: [DiscipleshipJourney!]!
   email: String
+  gender: String
   name: String!
   phone: String
   status: [LeadershipStatus!]!
@@ -126,7 +128,7 @@ type Query {
 }
 
 input UpdateUserInput {
-  date_of_birth: String
+  dateOfBirth: String
   discipleshipJourney: [DiscipleshipJourney!]
   email: String
   name: String
@@ -136,11 +138,13 @@ input UpdateUserInput {
 }
 
 type User {
-  date_of_birth: String
+  address: String
+  dateOfBirth: String
   disciples: [User!]!
   discipleshipJourney: [DiscipleshipJourney!]!
   domain: Domain
   email: String
+  gender: String
   id: Int!
   leaders: [User!]!
   lifeGroups: [GqlUserLifeGroupRole!]!

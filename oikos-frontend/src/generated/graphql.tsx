@@ -34,9 +34,11 @@ export type CreateEventInput = {
 };
 
 export type CreateUserInput = {
-  date_of_birth?: InputMaybe<Scalars['String']>;
+  address?: InputMaybe<Scalars['String']>;
+  dateOfBirth?: InputMaybe<Scalars['String']>;
   discipleshipJourney: Array<DiscipleshipJourney>;
   email?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   phone?: InputMaybe<Scalars['String']>;
   status: Array<LeadershipStatus>;
@@ -206,7 +208,7 @@ export type QueryGetUserArgs = {
 };
 
 export type UpdateUserInput = {
-  date_of_birth?: InputMaybe<Scalars['String']>;
+  dateOfBirth?: InputMaybe<Scalars['String']>;
   discipleshipJourney?: InputMaybe<Array<DiscipleshipJourney>>;
   email?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -217,11 +219,13 @@ export type UpdateUserInput = {
 
 export type User = {
   __typename?: 'User';
-  date_of_birth?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  dateOfBirth?: Maybe<Scalars['String']>;
   disciples: Array<User>;
   discipleshipJourney: Array<DiscipleshipJourney>;
   domain?: Maybe<Domain>;
   email?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   leaders: Array<User>;
   lifeGroups: Array<GqlUserLifeGroupRole>;
@@ -243,32 +247,32 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', date_of_birth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
 
-export type UserFragmentFragment = { __typename?: 'User', date_of_birth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null };
+export type UserFragmentFragment = { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> };
 
 export type GetUserQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', result: { __typename?: 'User', date_of_birth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null } };
+export type GetUserQuery = { __typename?: 'Query', result: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUsersQuery = { __typename?: 'Query', result: Array<{ __typename?: 'User', date_of_birth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null }> };
+export type GetUsersQuery = { __typename?: 'Query', result: Array<{ __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> }> };
 
 export type GetUsersPaginatedQueryVariables = Exact<{
   input: GetAllUsersPaginatedInput;
 }>;
 
 
-export type GetUsersPaginatedQuery = { __typename?: 'Query', result: { __typename?: 'UserPaginatedResponse', totalCount: number, nodes: Array<{ __typename?: 'User', date_of_birth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null }>, pageInfo: { __typename?: 'PageInfo', nextPage?: { __typename?: 'Page', skip: number, take: number } | null, prevPage?: { __typename?: 'Page', skip: number, take: number } | null } } };
+export type GetUsersPaginatedQuery = { __typename?: 'Query', result: { __typename?: 'UserPaginatedResponse', totalCount: number, nodes: Array<{ __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null }>, pageInfo: { __typename?: 'PageInfo', nextPage?: { __typename?: 'Page', skip: number, take: number } | null, prevPage?: { __typename?: 'Page', skip: number, take: number } | null } } };
 
 export const UserFragmentFragmentDoc = gql`
     fragment UserFragment on User {
-  date_of_birth
+  dateOfBirth
   discipleshipJourney
   email
   id
@@ -276,6 +280,19 @@ export const UserFragmentFragmentDoc = gql`
   phone
   status
   username
+  address
+  gender
+  leaders {
+    name
+  }
+  disciples {
+    name
+  }
+  lifeGroups {
+    lifeGroup {
+      title
+    }
+  }
 }
     `;
 export const CreateUserDocument = gql`
@@ -384,7 +401,7 @@ export const GetUsersPaginatedDocument = gql`
     query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
   result: getAllUsersPaginated(input: $input) {
     nodes {
-      date_of_birth
+      dateOfBirth
       discipleshipJourney
       email
       id
@@ -392,6 +409,8 @@ export const GetUsersPaginatedDocument = gql`
       phone
       status
       username
+      address
+      gender
     }
     pageInfo {
       nextPage {

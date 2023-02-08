@@ -58,7 +58,13 @@ export class CreateUserInput {
   phone?: string;
 
   @Field({ nullable: true })
-  date_of_birth?: string;
+  address?: string;
+
+  @Field({ nullable: true })
+  gender?: string;
+
+  @Field({ nullable: true })
+  dateOfBirth?: string;
 }
 
 @InputType()
@@ -79,7 +85,7 @@ export class UpdateUserInput {
   phone?: string;
 
   @Field({ nullable: true })
-  date_of_birth?: string;
+  dateOfBirth?: string;
 
   @Field((type) => [DiscipleshipJourney], { nullable: true })
   discipleshipJourney?: DiscipleshipJourney[];

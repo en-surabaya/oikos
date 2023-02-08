@@ -5,7 +5,7 @@ import { AvatarWithText } from "../../components/Avatar/AvatarWithText";
 import { Clipboard } from "../../components/Clipboard/Clipboard";
 import { ClipboardContent } from "../../components/Clipboard/ClipboardContent";
 import { PillGroup } from "../../components/PillGroup/PillGroup";
-import { useGetUserQuery } from "../../generated/graphql";
+import { useGetUserQuery, User } from "../../generated/graphql";
 type RouterParam = {
   id: string;
 };
@@ -15,6 +15,21 @@ export const PeopleDetail: FC = () => {
   if (!data) {
     return <div>ndasmu</div>;
   }
+  const leaders = data.result.leaders.map((value) => value.name);
+  const disciples = data.result.disciples.map((value) => value.name);
+  const discipleshipJourney = data.result.discipleshipJourney;
+  const biodata = {
+    address: data.result.address || "",
+    phone: data.result.phone || "",
+    email: data.result.email || "",
+    church: data.result.phone || "",
+    gender: data.result.gender || "",
+    birthDate: data.result.dateOfBirth || "",
+  };
+  const lifegroups = data.result.lifeGroups.map(
+    (value) => value.lifeGroup.title
+  );
+
   return (
     <div className="w-full h-full">
       <div className="flex flex-col w-full h-full p-16 pt-24 space-y-12">
@@ -30,63 +45,23 @@ export const PeopleDetail: FC = () => {
           </button>
         </div>
         <div className="flex items-start justify-between w-full">
-          <div className="w-[30%] flex flex-col">
+          <div className="w-[30%] flex flex-col h-full">
             <Clipboard title="Bio">
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Address</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">Royal Residence No. 1</h1>
-                </div>
-              </ClipboardContent>
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Phone</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">+62811111111</h1>
-                </div>
-              </ClipboardContent>
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Email</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">xoffel@gmail.com</h1>
-                </div>
-              </ClipboardContent>
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Church</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">EN Surabaya Barat</h1>
-                </div>
-              </ClipboardContent>
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Gender</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">Male</h1>
-                </div>
-              </ClipboardContent>
-              <ClipboardContent>
-                <div className="flex justify-start w-full px-4">
-                  <div className="flex justify-between w-[40%]">
-                    <h1>Birth Date</h1>
-                    <h1>:</h1>
-                  </div>
-                  <h1 className="w-[60%] ml-2">30 February 2000</h1>
-                </div>
-              </ClipboardContent>
-              <div className="py-16" />
+              {Object.keys(biodata).map((key: string) => {
+                return (
+                  <ClipboardContent>
+                    <div className="flex justify-start w-full px-4">
+                      <div className="flex justify-between w-[40%]">
+                        <h1>{key}</h1>
+                        <h1>:</h1>
+                      </div>
+                      <h1 className="w-[60%] ml-2">
+                        {biodata[key as keyof typeof biodata]}
+                      </h1>
+                    </div>
+                  </ClipboardContent>
+                );
+              })}
             </Clipboard>
           </div>
           <div className="w-[35%]">
@@ -94,7 +69,9 @@ export const PeopleDetail: FC = () => {
               <Clipboard title="Handled By">
                 <ClipboardContent>
                   <div className="px-3">
-                    <PillGroup items={["Yotam Hezron", "Benny Koesno", "+"]} />
+                    <PillGroup
+                      items={leaders.length > 0 ? leaders : ["I HAVE NOBODY"]}
+                    />
                   </div>
                 </ClipboardContent>
               </Clipboard>
@@ -104,16 +81,9 @@ export const PeopleDetail: FC = () => {
                 <ClipboardContent>
                   <div className="px-3">
                     <PillGroup
-                      items={[
-                        "Enoch",
-                        "Enoch",
-                        "Enoch",
-                        "Enoch",
-                        "Enoch",
-                        "Enoch",
-                        "Enoch",
-                        "Yoel Sitorus",
-                      ]}
+                      items={
+                        disciples.length > 0 ? disciples : ["MASIH BERDOSA"]
+                      }
                     />
                   </div>
                 </ClipboardContent>
@@ -123,31 +93,23 @@ export const PeopleDetail: FC = () => {
           <div className="w-[30%]">
             <div className="flex flex-col justify-between h-[40%]">
               <Clipboard title="Lifegroup">
-                <ClipboardContent>
-                  <h1 className="px-5 mb-3">Ukp Guys</h1>
-                  <hr className="border-dark-light"></hr>
-                </ClipboardContent>
-                <ClipboardContent>
-                  <h1 className="px-5 mb-3">Timur Genk</h1>
-                  <hr className="border-dark-light"></hr>
-                </ClipboardContent>
+                {lifegroups.map((value) => (
+                  <ClipboardContent>
+                    <h1 className="px-5 mb-3">{value}</h1>
+                    <hr className="border-dark-light"></hr>
+                  </ClipboardContent>
+                ))}
                 <div className="py-1" />
               </Clipboard>
             </div>
             <div className="flex flex-col justify-between h-[40%]">
-              <Clipboard title="History">
-                <ClipboardContent>
-                  <h1 className="px-5 mb-3">One 2 One</h1>
-                  <hr className="border-dark-light"></hr>
-                </ClipboardContent>
-                <ClipboardContent>
-                  <h1 className="px-5 mb-3">Victory Weekend</h1>
-                  <hr className="border-dark-light"></hr>
-                </ClipboardContent>
-                <ClipboardContent>
-                  <h1 className="px-5 mb-3">Church Community</h1>
-                  <hr className="border-dark-light"></hr>
-                </ClipboardContent>
+              <Clipboard title="Discipleship Journey">
+                {discipleshipJourney.map((value) => (
+                  <ClipboardContent>
+                    <h1 className="px-5 mb-3">{value}</h1>
+                    <hr className="border-dark-light"></hr>
+                  </ClipboardContent>
+                ))}
                 <div className="py-1" />
               </Clipboard>
             </div>
