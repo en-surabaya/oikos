@@ -208,9 +208,11 @@ export type QueryGetUserArgs = {
 };
 
 export type UpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   dateOfBirth?: InputMaybe<Scalars['String']>;
   discipleshipJourney?: InputMaybe<Array<DiscipleshipJourney>>;
   email?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
@@ -269,6 +271,14 @@ export type GetUsersPaginatedQueryVariables = Exact<{
 
 
 export type GetUsersPaginatedQuery = { __typename?: 'Query', result: { __typename?: 'UserPaginatedResponse', totalCount: number, nodes: Array<{ __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null }>, pageInfo: { __typename?: 'PageInfo', nextPage?: { __typename?: 'Page', skip: number, take: number } | null, prevPage?: { __typename?: 'Page', skip: number, take: number } | null } } };
+
+export type UpdateUserMutationVariables = Exact<{
+  userId: Scalars['Int'];
+  input: UpdateUserInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
 
 export const UserFragmentFragmentDoc = gql`
     fragment UserFragment on User {
@@ -454,3 +464,37 @@ export function useGetUsersPaginatedLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetUsersPaginatedQueryHookResult = ReturnType<typeof useGetUsersPaginatedQuery>;
 export type GetUsersPaginatedLazyQueryHookResult = ReturnType<typeof useGetUsersPaginatedLazyQuery>;
 export type GetUsersPaginatedQueryResult = Apollo.QueryResult<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($userId: Int!, $input: UpdateUserInput!) {
+  updateUser(userId: $userId, input: $input) {
+    ...UserFragment
+  }
+}
+    ${UserFragmentFragmentDoc}`;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;

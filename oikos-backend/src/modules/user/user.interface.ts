@@ -85,6 +85,12 @@ export class UpdateUserInput {
   phone?: string;
 
   @Field({ nullable: true })
+  address?: string;
+
+  @Field({ nullable: true })
+  gender?: string;
+
+  @Field({ nullable: true })
   dateOfBirth?: string;
 
   @Field((type) => [DiscipleshipJourney], { nullable: true })

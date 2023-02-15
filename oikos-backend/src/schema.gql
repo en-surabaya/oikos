@@ -128,9 +128,11 @@ type Query {
 }
 
 input UpdateUserInput {
+  address: String
   dateOfBirth: String
   discipleshipJourney: [DiscipleshipJourney!]
   email: String
+  gender: String
   name: String
   password: String
   phone: String
