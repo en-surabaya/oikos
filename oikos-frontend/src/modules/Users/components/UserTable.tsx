@@ -7,7 +7,7 @@ import { UserTableItem } from "./UserTableItem";
 
 export const UserTable: FC = () => {
   const query = usePagination();
-  const items = query.data;
+  const items = query.data.filter((item) => item.isActive === true);
   return (
     <PaginatedTable>
       <Table.Header>

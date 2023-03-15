@@ -43,6 +43,12 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async getAllActiveUser() {
+    return this.userRepository.find({
+      where: { isActive: true },
+    });
+  }
+
   async getAllUsersPaginated(input: GetAllUsersPaginatedInput) {
     return this.paginationService.handleRequest<GetAllUsersPaginatedFilterInput, User>(input, this.userRepository);
   }

@@ -127,7 +127,8 @@ export class User {
   @Column()
   activationToken: string;
 
-  @Column({ default: true })
+  @Field()
+  @Column({ nullable: true })
   isActive: boolean;
 
   @Column({ default: 0 })
