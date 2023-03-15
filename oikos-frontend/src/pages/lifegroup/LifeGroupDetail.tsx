@@ -11,6 +11,7 @@ import { useGetUserQuery, User } from "../../generated/graphql";
 import { OffsetPaginationProvider } from "../../components/Pagination/OffsetPaginationProvider";
 import { useGetUsersPaginated } from "../../modules/Users/query/getUsersPaginated";
 import { UpcomingEventList } from "../../modules/LifeGroup/components/UpcomingEventList";
+import { LifeGroupMemberDetailList } from "../../modules/LifeGroup/components/LifeGroupDetailMemberList";
 type RouterParam = {
   id: string;
 };
@@ -23,14 +24,14 @@ export const LifeGroupDetail: FC = () => {
   const leaders = data.result.leaders.map((value) => value.name);
   // const disciples = data.result.disciples.map((value) => value.name);
   // const discipleshipJourney = data.result.discipleshipJourney;
-  const biodata = {
-    address: data.result.address || "",
-    phone: data.result.phone || "",
-    email: data.result.email || "",
-    church: data.result.phone || "",
-    gender: data.result.gender || "",
-    birthDate: data.result.dateOfBirth || "",
-  };
+  // const biodata = {
+  //   address: data.result.address || "",
+  //   phone: data.result.phone || "",
+  //   email: data.result.email || "",
+  //   church: data.result.phone || "",
+  //   gender: data.result.gender || "",
+  //   birthDate: data.result.dateOfBirth || "",
+  // };
   const lifegroups = data.result.lifeGroups.map(
     (value) => value.lifeGroup.title
   );
@@ -52,21 +53,13 @@ export const LifeGroupDetail: FC = () => {
         <div className="flex items-start justify-between w-full">
           <div className="w-[30%] flex flex-col h-full">
             <Clipboard title="Members">
-              {Object.keys(biodata).map((key: string) => {
-                return (
-                  <ClipboardContent>
-                    <div className="flex justify-start w-full px-4">
-                      <div className="flex justify-between w-[40%]">
-                        <h1>{key}</h1>
-                        <h1>:</h1>
-                      </div>
-                      <h1 className="w-[60%] ml-2">
-                        {biodata[key as keyof typeof biodata]}
-                      </h1>
-                    </div>
-                  </ClipboardContent>
-                );
-              })}
+              {/* {Object.keys(biodata).map((key: string) => { */}
+              {/* return ( */}
+              <ClipboardContent>
+                <LifeGroupMemberDetailList></LifeGroupMemberDetailList>
+              </ClipboardContent>
+              {/* ); */}
+              {/* })} */}
             </Clipboard>
           </div>
           <div className="w-[35%]">
@@ -103,7 +96,8 @@ export const LifeGroupDetail: FC = () => {
             <div className="flex flex-col justify-between h-[40%] py-5">
               <Section title="Upcoming">
                 <SectionContent>
-                  <OffsetPaginationProvider
+                  <UpcomingEventList />
+                  {/* <OffsetPaginationProvider
                     initialFilter={{}}
                     initialPage={{ skip: 0, take: 10 }}
                     paginationHook={useGetUsersPaginated}
@@ -127,7 +121,7 @@ export const LifeGroupDetail: FC = () => {
                         );
                       }
                     }}
-                  </OffsetPaginationProvider>
+                  </OffsetPaginationProvider> */}
                 </SectionContent>
               </Section>
             </div>

@@ -1,14 +1,23 @@
 import { FC } from "react";
-import { PaginatedList } from "../../../components/PaginatedTable/PaginatedList";
-import { usePagination } from "../../../components/Pagination/PaginationProvider";
 import { List } from "../../../components/List";
 import { UpcomingEventListItem } from "./UpcomingEventListItem";
 
 export const UpcomingEventList: FC = () => {
-  const query = usePagination();
-  const items = query.data;
+  // Hard-coding items for now. Later populate with UpcomingEventFragment
+  const items = [
+    {
+      id: "0",
+      name: "Event 1",
+      date: "1 Jan 2023",
+    },
+    {
+      id: "1",
+      name: "Event 2",
+      date: "1 Feb 2023",
+    },
+  ];
   return (
-    <PaginatedList>
+    <List>
       <List.Body>
         {items?.map((item) => (
           <UpcomingEventListItem
@@ -17,6 +26,6 @@ export const UpcomingEventList: FC = () => {
           />
         ))}
       </List.Body>
-    </PaginatedList>
+    </List>
   );
 };

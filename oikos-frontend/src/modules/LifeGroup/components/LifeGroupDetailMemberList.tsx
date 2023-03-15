@@ -1,22 +1,31 @@
 import { FC } from "react";
-import { PaginatedList } from "../../../components/PaginatedTable/PaginatedList";
-import { usePagination } from "../../../components/Pagination/PaginationProvider";
 import { List } from "../../../components/List";
-import { UpcomingEventListItem } from "./UpcomingEventListItem";
+import { LifeGroupMemberListItem } from "./LifeGroupDetailMemberListItem";
 
-export const UpcomingEventList: FC = () => {
-  const query = usePagination();
-  const items = query.data;
+export const LifeGroupMemberDetailList: FC = () => {
+  // Hard-coding items for now. Later populate with UpcomingEventFragment
+  const items = [
+    {
+      id: "0",
+      name: "User 1",
+      role: "Leader",
+    },
+    {
+      id: "1",
+      name: "User 2",
+      role: "",
+    },
+  ];
   return (
-    <PaginatedList>
+    <List>
       <List.Body>
         {items?.map((item) => (
-          <UpcomingEventListItem
+          <LifeGroupMemberListItem
             key={`upcoming-event-list-item-${item.id}`}
             item={item}
           />
         ))}
       </List.Body>
-    </PaginatedList>
+    </List>
   );
 };

@@ -8,7 +8,7 @@ const ListBodyRow: FC<{
       onClick={onClick}
       className={`${
         onClick ? "hover:cursor-pointer" : ""
-      } border-b hover:bg-amber-500/50`}
+      } hover:text-amber-500`}
     >
       {children}
     </tr>
@@ -16,7 +16,7 @@ const ListBodyRow: FC<{
 };
 
 const ListBodyCell: FC = ({ children }) => {
-  return <td className="py-2 px-2 text-black">{children}</td>;
+  return <td className="py-2 px-2">{children}</td>;
 };
 
 const ListBodyRoot: FC = ({ children }) => {
