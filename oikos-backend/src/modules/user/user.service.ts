@@ -40,7 +40,11 @@ export class UserService {
   }
 
   async getAllUser() {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      where: {
+        isActive: 1,
+      }
+    });
   }
 
   async getAllUsersPaginated(input: GetAllUsersPaginatedInput) {

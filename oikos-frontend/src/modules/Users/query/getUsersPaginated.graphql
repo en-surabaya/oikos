@@ -11,6 +11,7 @@ query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
       username
       address
       gender
+      isActive
     }
     pageInfo {
       nextPage {

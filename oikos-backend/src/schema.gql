@@ -148,6 +148,7 @@ type User {
   email: String
   gender: String
   id: Int!
+  isActive: Boolean!
   leaders: [User!]!
   lifeGroups: [GqlUserLifeGroupRole!]!
   name: String!

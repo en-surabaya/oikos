@@ -15,7 +15,7 @@ export class PaginationService {
     } = param;
 
     const [nodes, totalCount] = await repo.findAndCount({
-      where: filter ? { ...filter } : {},
+      where: filter ? { ...filter, isActive: 1 } : {},
       take,
       skip,
       ...options,
