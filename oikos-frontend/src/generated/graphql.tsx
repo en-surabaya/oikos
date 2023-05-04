@@ -1,10 +1,16 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -17,51 +23,51 @@ export type Scalars = {
 };
 
 export type ActivateUserInput = {
-  activationToken: Scalars['String'];
-  password: Scalars['String'];
-  userId: Scalars['Int'];
-  username: Scalars['String'];
+  activationToken: Scalars["String"];
+  password: Scalars["String"];
+  userId: Scalars["Int"];
+  username: Scalars["String"];
 };
 
 export type CreateEventInput = {
-  allDay?: InputMaybe<Scalars['Boolean']>;
-  end?: InputMaybe<Scalars['DateTime']>;
-  groupId?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['String']>;
-  start: Scalars['DateTime'];
-  title: Scalars['String'];
-  url?: InputMaybe<Scalars['String']>;
+  allDay?: InputMaybe<Scalars["Boolean"]>;
+  end?: InputMaybe<Scalars["DateTime"]>;
+  groupId?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["String"]>;
+  start: Scalars["DateTime"];
+  title: Scalars["String"];
+  url?: InputMaybe<Scalars["String"]>;
 };
 
 export type CreateUserInput = {
-  address?: InputMaybe<Scalars['String']>;
-  dateOfBirth?: InputMaybe<Scalars['String']>;
+  address?: InputMaybe<Scalars["String"]>;
+  dateOfBirth?: InputMaybe<Scalars["String"]>;
   discipleshipJourney: Array<DiscipleshipJourney>;
-  email?: InputMaybe<Scalars['String']>;
-  gender?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
-  phone?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars["String"]>;
+  gender?: InputMaybe<Scalars["String"]>;
+  name: Scalars["String"];
+  phone?: InputMaybe<Scalars["String"]>;
   status: Array<LeadershipStatus>;
 };
 
 export enum DiscipleshipJourney {
-  Engage = 'ENGAGE'
+  Engage = "ENGAGE",
 }
 
 export type Domain = {
-  __typename?: 'Domain';
-  address: Scalars['String'];
-  id: Scalars['Int'];
-  title: Scalars['String'];
+  __typename?: "Domain";
+  address: Scalars["String"];
+  id: Scalars["Int"];
+  title: Scalars["String"];
 };
 
 export type EventEntity = {
-  __typename?: 'EventEntity';
-  id: Scalars['Int'];
+  __typename?: "EventEntity";
+  id: Scalars["Int"];
 };
 
 export type GetAllUsersPaginatedFilterInput = {
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars["String"]>;
 };
 
 export type GetAllUsersPaginatedInput = {
@@ -70,45 +76,45 @@ export type GetAllUsersPaginatedInput = {
 };
 
 export type GqlLifeGroupMember = {
-  __typename?: 'GqlLifeGroupMember';
+  __typename?: "GqlLifeGroupMember";
   role: LifeGroupRole;
   user: User;
 };
 
 export type GqlUserLifeGroupRole = {
-  __typename?: 'GqlUserLifeGroupRole';
+  __typename?: "GqlUserLifeGroupRole";
   lifeGroup: LifeGroup;
   role: LifeGroupRole;
 };
 
 export type Jwt = {
-  __typename?: 'JWT';
-  access_token: Scalars['String'];
+  __typename?: "JWT";
+  access_token: Scalars["String"];
 };
 
 export enum LeadershipStatus {
-  CampusMissionary = 'CAMPUS_MISSIONARY',
-  Intern = 'INTERN',
-  Leader = 'LEADER',
-  Member = 'MEMBER',
-  PotentialMember = 'POTENTIAL_MEMBER'
+  CampusMissionary = "CAMPUS_MISSIONARY",
+  Intern = "INTERN",
+  Leader = "LEADER",
+  Member = "MEMBER",
+  PotentialMember = "POTENTIAL_MEMBER",
 }
 
 export type LifeGroup = {
-  __typename?: 'LifeGroup';
+  __typename?: "LifeGroup";
   domain?: Maybe<Domain>;
-  id: Scalars['Int'];
+  id: Scalars["Int"];
   members: Array<GqlLifeGroupMember>;
-  title: Scalars['String'];
+  title: Scalars["String"];
 };
 
 export enum LifeGroupRole {
-  Leader = 'LEADER',
-  Member = 'MEMBER'
+  Leader = "LEADER",
+  Member = "MEMBER",
 }
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   activateUser: User;
   addLifeGroupMember: LifeGroup;
   attachDisciple: User;
@@ -120,76 +126,68 @@ export type Mutation = {
   updateUser: User;
 };
 
-
 export type MutationActivateUserArgs = {
   input: ActivateUserInput;
 };
 
-
 export type MutationAddLifeGroupMemberArgs = {
-  lifeGroupId: Scalars['Int'];
-  role: Scalars['String'];
-  userId: Scalars['Int'];
+  lifeGroupId: Scalars["Int"];
+  role: Scalars["String"];
+  userId: Scalars["Int"];
 };
-
 
 export type MutationAttachDiscipleArgs = {
-  discipleId: Scalars['Int'];
-  leaderId: Scalars['Int'];
+  discipleId: Scalars["Int"];
+  leaderId: Scalars["Int"];
 };
-
 
 export type MutationCreateDomainArgs = {
-  address: Scalars['String'];
-  title: Scalars['String'];
+  address: Scalars["String"];
+  title: Scalars["String"];
 };
-
 
 export type MutationCreateEventArgs = {
   input: CreateEventInput;
 };
 
-
 export type MutationCreateLifeGroupArgs = {
-  title: Scalars['String'];
+  title: Scalars["String"];
 };
-
 
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
 };
 
-
 export type MutationLoginArgs = {
-  password: Scalars['String'];
-  username: Scalars['String'];
+  password: Scalars["String"];
+  username: Scalars["String"];
 };
-
 
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
-  userId: Scalars['Int'];
+  userId: Scalars["Int"];
 };
 
 export type Page = {
-  __typename?: 'Page';
-  skip: Scalars['Int'];
-  take: Scalars['Int'];
+  __typename?: "Page";
+  skip: Scalars["Int"];
+  take: Scalars["Int"];
 };
 
 export type PageInfo = {
-  __typename?: 'PageInfo';
+  __typename?: "PageInfo";
   nextPage?: Maybe<Page>;
   prevPage?: Maybe<Page>;
 };
 
 export type PageInput = {
-  skip: Scalars['Int'];
-  take: Scalars['Int'];
+  skip: Scalars["Int"];
+  take: Scalars["Int"];
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
+  getActiveUsers: Array<User>;
   getAllUsersPaginated: UserPaginatedResponse;
   getDomains: Array<Domain>;
   getLifeGroups: Array<LifeGroup>;
@@ -197,124 +195,248 @@ export type Query = {
   getUsers: Array<User>;
 };
 
-
 export type QueryGetAllUsersPaginatedArgs = {
   input: GetAllUsersPaginatedInput;
 };
 
-
 export type QueryGetUserArgs = {
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
 
 export type UpdateUserInput = {
-  address?: InputMaybe<Scalars['String']>;
-  dateOfBirth?: InputMaybe<Scalars['String']>;
+  address?: InputMaybe<Scalars["String"]>;
+  dateOfBirth?: InputMaybe<Scalars["String"]>;
   discipleshipJourney?: InputMaybe<Array<DiscipleshipJourney>>;
-  email?: InputMaybe<Scalars['String']>;
-  gender?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars["String"]>;
+  gender?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars["String"]>;
+  password?: InputMaybe<Scalars["String"]>;
+  phone?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Array<LeadershipStatus>>;
 };
 
 export type User = {
-  __typename?: 'User';
-  address?: Maybe<Scalars['String']>;
-  dateOfBirth?: Maybe<Scalars['String']>;
+  __typename?: "User";
+  address?: Maybe<Scalars["String"]>;
+  dateOfBirth?: Maybe<Scalars["String"]>;
   disciples: Array<User>;
   discipleshipJourney: Array<DiscipleshipJourney>;
   domain?: Maybe<Domain>;
-  email?: Maybe<Scalars['String']>;
-  gender?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
-  isActive: Scalars['Boolean'];
+  email?: Maybe<Scalars["String"]>;
+  gender?: Maybe<Scalars["String"]>;
+  id: Scalars["Int"];
+  isActive: Scalars["Boolean"];
   leaders: Array<User>;
   lifeGroups: Array<GqlUserLifeGroupRole>;
-  name: Scalars['String'];
-  phone?: Maybe<Scalars['String']>;
+  name: Scalars["String"];
+  phone?: Maybe<Scalars["String"]>;
   status: Array<LeadershipStatus>;
-  username?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars["String"]>;
 };
 
 export type UserPaginatedResponse = {
-  __typename?: 'UserPaginatedResponse';
+  __typename?: "UserPaginatedResponse";
   nodes: Array<User>;
   pageInfo: PageInfo;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 export type CreateUserMutationVariables = Exact<{
   input: CreateUserInput;
 }>;
 
+export type CreateUserMutation = {
+  __typename?: "Mutation";
+  createUser: {
+    __typename?: "User";
+    dateOfBirth?: string | null;
+    discipleshipJourney: Array<DiscipleshipJourney>;
+    email?: string | null;
+    id: number;
+    name: string;
+    phone?: string | null;
+    status: Array<LeadershipStatus>;
+    username?: string | null;
+    address?: string | null;
+    gender?: string | null;
+    leaders: Array<{ __typename?: "User"; name: string }>;
+    disciples: Array<{ __typename?: "User"; name: string }>;
+    lifeGroups: Array<{
+      __typename?: "GqlUserLifeGroupRole";
+      lifeGroup: { __typename?: "LifeGroup"; title: string };
+    }>;
+  };
+};
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
-
-export type UserFragmentFragment = { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> };
+export type UserFragmentFragment = {
+  __typename?: "User";
+  dateOfBirth?: string | null;
+  discipleshipJourney: Array<DiscipleshipJourney>;
+  email?: string | null;
+  id: number;
+  name: string;
+  phone?: string | null;
+  status: Array<LeadershipStatus>;
+  username?: string | null;
+  address?: string | null;
+  gender?: string | null;
+  leaders: Array<{ __typename?: "User"; name: string }>;
+  disciples: Array<{ __typename?: "User"; name: string }>;
+  lifeGroups: Array<{
+    __typename?: "GqlUserLifeGroupRole";
+    lifeGroup: { __typename?: "LifeGroup"; title: string };
+  }>;
+};
 
 export type GetUserQueryVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
+export type GetUserQuery = {
+  __typename?: "Query";
+  result: {
+    __typename?: "User";
+    dateOfBirth?: string | null;
+    discipleshipJourney: Array<DiscipleshipJourney>;
+    email?: string | null;
+    id: number;
+    name: string;
+    phone?: string | null;
+    status: Array<LeadershipStatus>;
+    username?: string | null;
+    address?: string | null;
+    gender?: string | null;
+    leaders: Array<{ __typename?: "User"; name: string }>;
+    disciples: Array<{ __typename?: "User"; name: string }>;
+    lifeGroups: Array<{
+      __typename?: "GqlUserLifeGroupRole";
+      lifeGroup: { __typename?: "LifeGroup"; title: string };
+    }>;
+  };
+};
 
-export type GetUserQuery = { __typename?: 'Query', result: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
+export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', result: Array<{ __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> }> };
+export type GetUsersQuery = {
+  __typename?: "Query";
+  result: Array<{
+    __typename?: "User";
+    dateOfBirth?: string | null;
+    discipleshipJourney: Array<DiscipleshipJourney>;
+    email?: string | null;
+    id: number;
+    name: string;
+    phone?: string | null;
+    status: Array<LeadershipStatus>;
+    username?: string | null;
+    address?: string | null;
+    gender?: string | null;
+    leaders: Array<{ __typename?: "User"; name: string }>;
+    disciples: Array<{ __typename?: "User"; name: string }>;
+    lifeGroups: Array<{
+      __typename?: "GqlUserLifeGroupRole";
+      lifeGroup: { __typename?: "LifeGroup"; title: string };
+    }>;
+  }>;
+};
 
 export type GetUsersPaginatedQueryVariables = Exact<{
   input: GetAllUsersPaginatedInput;
 }>;
 
-
-export type GetUsersPaginatedQuery = { __typename?: 'Query', result: { __typename?: 'UserPaginatedResponse', totalCount: number, nodes: Array<{ __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean }>, pageInfo: { __typename?: 'PageInfo', nextPage?: { __typename?: 'Page', skip: number, take: number } | null, prevPage?: { __typename?: 'Page', skip: number, take: number } | null } } };
+export type GetUsersPaginatedQuery = {
+  __typename?: "Query";
+  result: {
+    __typename?: "UserPaginatedResponse";
+    totalCount: number;
+    nodes: Array<{
+      __typename?: "User";
+      dateOfBirth?: string | null;
+      discipleshipJourney: Array<DiscipleshipJourney>;
+      email?: string | null;
+      id: number;
+      name: string;
+      phone?: string | null;
+      status: Array<LeadershipStatus>;
+      username?: string | null;
+      address?: string | null;
+      gender?: string | null;
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      nextPage?: { __typename?: "Page"; skip: number; take: number } | null;
+      prevPage?: { __typename?: "Page"; skip: number; take: number } | null;
+    };
+  };
+};
 
 export type UpdateUserMutationVariables = Exact<{
-  userId: Scalars['Int'];
+  userId: Scalars["Int"];
   input: UpdateUserInput;
 }>;
 
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', dateOfBirth?: string | null, discipleshipJourney: Array<DiscipleshipJourney>, email?: string | null, id: number, name: string, phone?: string | null, status: Array<LeadershipStatus>, username?: string | null, address?: string | null, gender?: string | null, isActive: boolean, leaders: Array<{ __typename?: 'User', name: string }>, disciples: Array<{ __typename?: 'User', name: string }>, lifeGroups: Array<{ __typename?: 'GqlUserLifeGroupRole', lifeGroup: { __typename?: 'LifeGroup', title: string } }> } };
+export type UpdateUserMutation = {
+  __typename?: "Mutation";
+  updateUser: {
+    __typename?: "User";
+    dateOfBirth?: string | null;
+    discipleshipJourney: Array<DiscipleshipJourney>;
+    email?: string | null;
+    id: number;
+    name: string;
+    phone?: string | null;
+    status: Array<LeadershipStatus>;
+    username?: string | null;
+    address?: string | null;
+    gender?: string | null;
+    leaders: Array<{ __typename?: "User"; name: string }>;
+    disciples: Array<{ __typename?: "User"; name: string }>;
+    lifeGroups: Array<{
+      __typename?: "GqlUserLifeGroupRole";
+      lifeGroup: { __typename?: "LifeGroup"; title: string };
+    }>;
+  };
+};
 
 export const UserFragmentFragmentDoc = gql`
-    fragment UserFragment on User {
-  dateOfBirth
-  discipleshipJourney
-  email
-  id
-  name
-  phone
-  status
-  username
-  address
-  gender
-  isActive
-  leaders {
+  fragment UserFragment on User {
+    dateOfBirth
+    discipleshipJourney
+    email
+    id
     name
-  }
-  disciples {
-    name
-  }
-  lifeGroups {
-    lifeGroup {
-      title
+    phone
+    status
+    username
+    isActive
+    address
+    gender
+    isActive
+    leaders {
+      name
+    }
+    disciples {
+      name
+    }
+    lifeGroups {
+      lifeGroup {
+        title
+      }
     }
   }
-}
-    `;
+`;
 export const CreateUserDocument = gql`
-    mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    ...UserFragment
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      ...UserFragment
+    }
   }
-}
-    ${UserFragmentFragmentDoc}`;
-export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+  ${UserFragmentFragmentDoc}
+`;
+export type CreateUserMutationFn = Apollo.MutationFunction<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>;
 
 /**
  * __useCreateUserMutation__
@@ -333,20 +455,35 @@ export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, C
  *   },
  * });
  */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
-      }
-export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
-export const GetUserDocument = gql`
-    query getUser($id: Int!) {
-  result: getUser(id: $id) {
-    ...UserFragment
-  }
+export function useCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
+    CreateUserDocument,
+    options
+  );
 }
-    ${UserFragmentFragmentDoc}`;
+export type CreateUserMutationHookResult = ReturnType<
+  typeof useCreateUserMutation
+>;
+export type CreateUserMutationResult =
+  Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>;
+export const GetUserDocument = gql`
+  query getUser($id: Int!) {
+    result: getUser(id: $id) {
+      ...UserFragment
+    }
+  }
+  ${UserFragmentFragmentDoc}
+`;
 
 /**
  * __useGetUserQuery__
@@ -364,24 +501,38 @@ export const GetUserDocument = gql`
  *   },
  * });
  */
-export function useGetUserQuery(baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-      }
-export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-        }
+export function useGetUserQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(
+    GetUserDocument,
+    options
+  );
+}
+export function useGetUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(
+    GetUserDocument,
+    options
+  );
+}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
-export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export type GetUserQueryResult = Apollo.QueryResult<
+  GetUserQuery,
+  GetUserQueryVariables
+>;
 export const GetUsersDocument = gql`
-    query getUsers {
-  result: getUsers {
-    ...UserFragment
+  query getUsers {
+    result: getUsers {
+      ...UserFragment
+    }
   }
-}
-    ${UserFragmentFragmentDoc}`;
+  ${UserFragmentFragmentDoc}
+`;
 
 /**
  * __useGetUsersQuery__
@@ -398,47 +549,66 @@ export const GetUsersDocument = gql`
  *   },
  * });
  */
-export function useGetUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options);
-      }
-export function useGetUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options);
-        }
-export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
-export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
-export type GetUsersQueryResult = Apollo.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
-export const GetUsersPaginatedDocument = gql`
-    query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
-  result: getAllUsersPaginated(input: $input) {
-    nodes {
-      dateOfBirth
-      discipleshipJourney
-      email
-      id
-      name
-      phone
-      status
-      username
-      address
-      gender
-      isActive
-    }
-    pageInfo {
-      nextPage {
-        skip
-        take
-      }
-      prevPage {
-        skip
-        take
-      }
-    }
-    totalCount
-  }
+export function useGetUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUsersQuery, GetUsersQueryVariables>(
+    GetUsersDocument,
+    options
+  );
 }
-    `;
+export function useGetUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUsersQuery,
+    GetUsersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(
+    GetUsersDocument,
+    options
+  );
+}
+export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
+export type GetUsersLazyQueryHookResult = ReturnType<
+  typeof useGetUsersLazyQuery
+>;
+export type GetUsersQueryResult = Apollo.QueryResult<
+  GetUsersQuery,
+  GetUsersQueryVariables
+>;
+export const GetUsersPaginatedDocument = gql`
+  query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
+    result: getAllUsersPaginated(input: $input) {
+      nodes {
+        dateOfBirth
+        discipleshipJourney
+        email
+        id
+        name
+        phone
+        status
+        isActive
+        username
+        address
+        gender
+        isActive
+      }
+      pageInfo {
+        nextPage {
+          skip
+          take
+        }
+        prevPage {
+          skip
+          take
+        }
+      }
+      totalCount
+    }
+  }
+`;
 
 /**
  * __useGetUsersPaginatedQuery__
@@ -456,25 +626,52 @@ export const GetUsersPaginatedDocument = gql`
  *   },
  * });
  */
-export function useGetUsersPaginatedQuery(baseOptions: Apollo.QueryHookOptions<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>(GetUsersPaginatedDocument, options);
-      }
-export function useGetUsersPaginatedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>(GetUsersPaginatedDocument, options);
-        }
-export type GetUsersPaginatedQueryHookResult = ReturnType<typeof useGetUsersPaginatedQuery>;
-export type GetUsersPaginatedLazyQueryHookResult = ReturnType<typeof useGetUsersPaginatedLazyQuery>;
-export type GetUsersPaginatedQueryResult = Apollo.QueryResult<GetUsersPaginatedQuery, GetUsersPaginatedQueryVariables>;
-export const UpdateUserDocument = gql`
-    mutation UpdateUser($userId: Int!, $input: UpdateUserInput!) {
-  updateUser(userId: $userId, input: $input) {
-    ...UserFragment
-  }
+export function useGetUsersPaginatedQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetUsersPaginatedQuery,
+    GetUsersPaginatedQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetUsersPaginatedQuery,
+    GetUsersPaginatedQueryVariables
+  >(GetUsersPaginatedDocument, options);
 }
-    ${UserFragmentFragmentDoc}`;
-export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+export function useGetUsersPaginatedLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUsersPaginatedQuery,
+    GetUsersPaginatedQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetUsersPaginatedQuery,
+    GetUsersPaginatedQueryVariables
+  >(GetUsersPaginatedDocument, options);
+}
+export type GetUsersPaginatedQueryHookResult = ReturnType<
+  typeof useGetUsersPaginatedQuery
+>;
+export type GetUsersPaginatedLazyQueryHookResult = ReturnType<
+  typeof useGetUsersPaginatedLazyQuery
+>;
+export type GetUsersPaginatedQueryResult = Apollo.QueryResult<
+  GetUsersPaginatedQuery,
+  GetUsersPaginatedQueryVariables
+>;
+export const UpdateUserDocument = gql`
+  mutation UpdateUser($userId: Int!, $input: UpdateUserInput!) {
+    updateUser(userId: $userId, input: $input) {
+      ...UserFragment
+    }
+  }
+  ${UserFragmentFragmentDoc}
+`;
+export type UpdateUserMutationFn = Apollo.MutationFunction<
+  UpdateUserMutation,
+  UpdateUserMutationVariables
+>;
 
 /**
  * __useUpdateUserMutation__
@@ -494,10 +691,24 @@ export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, U
  *   },
  * });
  */
-export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
-      }
-export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
-export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
-export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export function useUpdateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateUserMutation,
+    UpdateUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(
+    UpdateUserDocument,
+    options
+  );
+}
+export type UpdateUserMutationHookResult = ReturnType<
+  typeof useUpdateUserMutation
+>;
+export type UpdateUserMutationResult =
+  Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateUserMutation,
+  UpdateUserMutationVariables
+>;

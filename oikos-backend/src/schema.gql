@@ -120,6 +120,7 @@ input PageInput {
 }
 
 type Query {
+  getActiveUsers: [User!]!
   getAllUsersPaginated(input: GetAllUsersPaginatedInput!): UserPaginatedResponse!
   getDomains: [Domain!]!
   getLifeGroups: [LifeGroup!]!

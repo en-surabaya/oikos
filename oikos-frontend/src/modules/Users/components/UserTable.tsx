@@ -8,7 +8,6 @@ import { UserTableItem } from "./UserTableItem";
 export const UserTable: FC = () => {
   const query = usePagination();
   const items = query.data;
-  console.log(query);
   return (
     <PaginatedTable>
       <Table.Header>
