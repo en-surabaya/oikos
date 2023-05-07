@@ -7,6 +7,7 @@ import { ClipboardContent } from "../../components/Clipboard/ClipboardContent";
 import { PillGroup } from "../../components/PillGroup/PillGroup";
 import { useGetUserQuery, User } from "../../generated/graphql";
 import { UserEditModal } from "../../modules/Users/components/UserEditModal";
+import { capitalize } from "lodash";
 type RouterParam = {
 	id: string;
 };
@@ -38,6 +39,9 @@ export const PeopleDetail: FC = () => {
 		birthDate: data.result.dateOfBirth || "",
 	};
 	const lifegroups = data.result.lifeGroups.map((value) => value.lifeGroup.title);
+	function capitalizeFirstLetter(str: string): string {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	  }
 
 	return (
 		<div className="w-full h-full">
@@ -57,7 +61,7 @@ export const PeopleDetail: FC = () => {
 									<ClipboardContent>
 										<div className="flex justify-start w-full px-4">
 											<div className="flex justify-between w-[40%]">
-												<h1>{key}</h1>
+												<h1>{capitalizeFirstLetter(key)}</h1>
 												<h1>:</h1>
 											</div>
 											<h1 className="w-[60%] ml-2">{biodata[key as keyof typeof biodata]}</h1>
