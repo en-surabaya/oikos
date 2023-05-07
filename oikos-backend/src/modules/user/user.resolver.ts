@@ -22,6 +22,11 @@ export class UserResolver {
     return this.userService.getAllUser();
   }
 
+  @Query((returns) => [User])
+  async getActiveUsers() {
+    return this.userService.getAllActiveUser();
+  }
+
   @Query((returns) => User)
   async getUser(@Args('id', { type: () => Int }) id: number) {
     return this.userService.findOneById(id);

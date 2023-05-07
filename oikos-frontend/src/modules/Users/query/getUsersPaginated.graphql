@@ -8,9 +8,11 @@ query getUsersPaginated($input: GetAllUsersPaginatedInput!) {
       name
       phone
       status
+      isActive
       username
       address
       gender
+      isActive
     }
     pageInfo {
       nextPage {

@@ -89,6 +89,20 @@ export class User {
   @Column({
     type: 'date',
     nullable: true,
+    transformer: {
+      to(value) {
+        if (!value) {
+          return value;
+        }
+        return new Date(value);
+      },
+      from(value: Date) {
+        if (!value) {
+          return value;
+        }
+        return value;
+      },
+    },
   })
   dateOfBirth?: string;
 
@@ -113,6 +127,7 @@ export class User {
   @Column()
   activationToken: string;
 
+  @Field()
   @Column({ default: true })
   isActive: boolean;
 

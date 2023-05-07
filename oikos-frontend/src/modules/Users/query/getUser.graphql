@@ -7,8 +7,10 @@ fragment UserFragment on User {
   phone
   status
   username
+  isActive
   address
   gender
+  isActive
   leaders {
     name
   }

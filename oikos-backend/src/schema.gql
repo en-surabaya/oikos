@@ -120,6 +120,7 @@ input PageInput {
 }
 
 type Query {
+  getActiveUsers: [User!]!
   getAllUsersPaginated(input: GetAllUsersPaginatedInput!): UserPaginatedResponse!
   getDomains: [Domain!]!
   getLifeGroups: [LifeGroup!]!
@@ -128,9 +129,11 @@ type Query {
 }
 
 input UpdateUserInput {
+  address: String
   dateOfBirth: String
   discipleshipJourney: [DiscipleshipJourney!]
   email: String
+  gender: String
   name: String
   password: String
   phone: String
@@ -146,6 +149,7 @@ type User {
   email: String
   gender: String
   id: Int!
+  isActive: Boolean!
   leaders: [User!]!
   lifeGroups: [GqlUserLifeGroupRole!]!
   name: String!

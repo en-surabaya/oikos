@@ -13,6 +13,7 @@ export const UserTableItem: FC<Props> = ({ item }) => {
   const onRowClick = () => {
     navigate(`/people/${item.id}`);
   };
+  console.log(item);
   return (
     <Table.Body.Row onClick={onRowClick}>
       <Table.Body.Row.Cell>{item.name}</Table.Body.Row.Cell>

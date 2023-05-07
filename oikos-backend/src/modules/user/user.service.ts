@@ -40,7 +40,17 @@ export class UserService {
   }
 
   async getAllUser() {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      where: {
+        isActive: 1,
+      }
+    });
+  }
+
+  async getAllActiveUser() {
+    return this.userRepository.find({
+      where: { isActive: true },
+    });
   }
 
   async getAllUsersPaginated(input: GetAllUsersPaginatedInput) {
@@ -104,7 +114,7 @@ export class UserService {
     const user = await this.findOneById(userId);
     const { id, isActive, ...oldUser } = user;
 
-    const isDirty = Object.keys(UpdateUserInput).some((prop) => {
+    const isDirty = Object.keys(input).some((prop) => {
       return prop ? true : false;
     });
 
